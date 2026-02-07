@@ -14,6 +14,20 @@ app.use(express.json());
 
 connectDB();
 
+// TEMPORARY DEBUG ROUTE - Add this right after app.use(express.json());
+app.get('/debug-test', (req, res) => {
+  res.json({ 
+    message: "Debug route working",
+    timestamp: new Date().toISOString(),
+    routes: [
+      "/api/check-registration/:scholarId",
+      "/api/login",
+      "/api/register",
+      "/api/profile/:scholarId"
+    ]
+  });
+});
+
 // Test route to verify routes work
 app.get("/test-profile", (req, res) => {
   res.json({ message: "Profile route test works" });
