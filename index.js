@@ -14,19 +14,6 @@ app.use(express.json());
 
 connectDB();
 
-// TEMPORARY DEBUG ROUTE - Add this right after app.use(express.json());
-app.get('/debug-test', (req, res) => {
-  res.json({ 
-    message: "Debug route working",
-    timestamp: new Date().toISOString(),
-    routes: [
-      "/api/check-registration/:scholarId",
-      "/api/login",
-      "/api/register",
-      "/api/profile/:scholarId"
-    ]
-  });
-});
 
 // Test route to verify routes work
 app.get("/test-profile", (req, res) => {
@@ -39,15 +26,17 @@ app.get('/api/check-registration/:scholarId', async (req, res) => {
   try {
     const { scholarId } = req.params;
     
-    // Check your database if this scholarId exists
+    // Check your database if this scholarId exists WITH EMAIL
     const student = await Student.findOne({ 
       scholarId: scholarId 
     });
     
-    // Return true if found, false if not
+    // Return true only if student exists AND has email
+    const isFullyRegistered = !!(student && student.email);
+    
     res.json({ 
-      isRegistered: !!student,
-      message: student ? "User is registered" : "User not registered"
+      isRegistered: isFullyRegistered,
+      message: isFullyRegistered ? "User is registered" : "User not registered or registration incomplete"
     });
     
   } catch (error) {
@@ -91,6 +80,8 @@ app.get("/", (req, res) => {
   res.json({ status: "Backend running" });
 });
 
+
+
 /* ------------------ LOGIN ------------------ */
 
 app.post("/api/login", async (req, res) => {
@@ -98,14 +89,25 @@ app.post("/api/login", async (req, res) => {
     const { scholarId } = req.body;
 
     const student = await Student.findOne({ scholarId });
+    
+    // Student not found at all
     if (!student) {
       return res.status(404).json({ 
         success: false, 
-        error: "Student not found" 
+        error: "Student not found. Please register first." 
+      });
+    }
+    
+    // Student found but doesn't have email (not fully registered)
+    if (!student.email) {
+      return res.status(403).json({ 
+        success: false, 
+        error: "Registration incomplete. Please complete registration first.",
+        requiresRegistration: true
       });
     }
 
-    // Make sure all fields are included
+    // Student is fully registered with email
     res.json({ 
       success: true, 
       student: {
@@ -137,7 +139,7 @@ app.post("/api/register", async (req, res) => {
     
     console.log("Registration attempt:", { scholarId, email, userName });
     
-    // Validate input
+    // Validate input - stricter email validation
     if (!scholarId || !email || !userName) {
       return res.status(400).json({ 
         success: false, 
@@ -145,46 +147,53 @@ app.post("/api/register", async (req, res) => {
       });
     }
     
-    // Check if already exists
-    const existingStudent = await Student.findOne({ 
-      $or: [{ scholarId }, { email }] 
-    });
-    
-    if (existingStudent) {
-      // Update existing student (match your schema fields)
-      console.log("Student exists, updating...");
-      
-      existingStudent.email = email;
-      existingStudent.userName = userName;
-      existingStudent.name = userName; // Also update name field
-      
-      await existingStudent.save();
-      
-      return res.json({ 
-        success: true, 
-        message: "Registration updated successfully",
-        student: existingStudent
+    // Validate email format (NIT Silchar format)
+    if (!email.includes('@') || !email.includes('nits.ac.in')) {
+      return res.status(400).json({ 
+        success: false, 
+        error: "Please use a valid NIT Silchar email address" 
       });
     }
     
-    // Create new student (match your schema fields)
+    // Check if student exists (with or without email)
+    let student = await Student.findOne({ scholarId });
+    
+    if (student) {
+      // Update existing student - set email and userName
+      console.log("Student exists, completing registration...");
+      
+      student.email = email;
+      student.userName = userName;
+      student.name = userName; // Also update name field
+      
+      await student.save();
+      
+      console.log("Registration completed for existing student:", student.scholarId);
+      
+      return res.json({ 
+        success: true, 
+        message: "Registration completed successfully",
+        student: student
+      });
+    }
+    
+    // Create new student
     console.log("Creating new student...");
     
     const newStudent = new Student({
       scholarId,
       email,
       userName,
-      name: userName, // Both name and userName
-      profileImage: "default.png", // Default from your schema
+      name: userName,
+      profileImage: "default.png",
       cgpa: 0,
       sgpa_curr: 0,
       sgpa_prev: 0
-      // createdAt and updatedAt will be added automatically by mongoose
     });
     
     await newStudent.save();
     
-    console.log("Student created successfully:", newStudent.scholarId);
+    console.log("New student created successfully:", newStudent.scholarId);
     
     res.json({ 
       success: true, 
@@ -200,7 +209,6 @@ app.post("/api/register", async (req, res) => {
     });
   }
 });
-
 
 
 /* ------------------ PROFILE ------------------ */
