@@ -19,6 +19,31 @@ app.get("/test-profile", (req, res) => {
   res.json({ message: "Profile route test works" });
 });
 
+
+/// Add this route to your existing backend
+app.get('/api/check-registration/:scholarId', async (req, res) => {
+  try {
+    const { scholarId } = req.params;
+    
+    // Check your database if this scholarId exists
+    const student = await Student.findOne({ 
+      scholarId: scholarId 
+    });
+    
+    // Return true if found, false if not
+    res.json({ 
+      isRegistered: !!student,
+      message: student ? "User is registered" : "User not registered"
+    });
+    
+  } catch (error) {
+    res.status(500).json({ 
+      isRegistered: false, 
+      error: "Server error checking registration" 
+    });
+  }
+});
+
 /* ------------------ HELPERS ------------------ */
 
 function getCurrentSemesterFromScholarId(scholarId) {
