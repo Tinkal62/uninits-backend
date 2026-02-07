@@ -5,44 +5,157 @@ const cors = require("cors");
 
 const connectDB = require("./db/connect");
 const Student = require("./db/student.schema");
+const Course = require("./db/course.schema");
 const Attendance = require("./db/attendance.schema");
 
 const app = express();
-
 app.use(cors());
 app.use(express.json());
 
 connectDB();
 
-// Health check
+/* ------------------ HELPERS ------------------ */
+
+function getCurrentSemesterFromScholarId(scholarId) {
+  if (!scholarId) return null;
+
+  const yearCode = scholarId.toString().slice(0, 2);
+  const semesterMap = {
+    "22": 8,
+    "23": 6,
+    "24": 4,
+    "25": 2
+  };
+  return semesterMap[yearCode] || null;
+}
+
+function getBranchFromScholarId(scholarId) {
+  const code = Number(scholarId.toString()[3]);
+  return {
+    1: "CE",
+    2: "CSE",
+    3: "EE",
+    4: "ECE",
+    5: "EIE",
+    6: "ME"
+  }[code];
+}
+
+/* ------------------ HEALTH ------------------ */
+
 app.get("/", (req, res) => {
   res.json({ status: "Backend running" });
 });
 
-// LOGIN
+/* ------------------ LOGIN ------------------ */
+
 app.post("/api/login", async (req, res) => {
-  const { scholarId } = req.body;
+  try {
+    const { scholarId } = req.body;
 
-  const student = await Student.findOne({ scholarId });
-  if (!student) {
-    return res.status(404).json({ error: "Student not found" });
+    const student = await Student.findOne({ scholarId });
+    if (!student) {
+      return res.status(404).json({ error: "Student not found" });
+    }
+
+    res.json({ success: true, student });
+  } catch (err) {
+    res.status(500).json({ error: "Server error" });
   }
-
-  res.json({ success: true, student });
 });
 
-// ATTENDANCE
+/* ------------------ PROFILE ------------------ */
+
+app.get("/api/profile/:scholarId", async (req, res) => {
+  try {
+    const { scholarId } = req.params;
+
+    const student = await Student.findOne({ scholarId });
+    if (!student) return res.status(404).json({ error: "Not found" });
+
+    const semester = getCurrentSemesterFromScholarId(scholarId);
+    const branchShort = getBranchFromScholarId(scholarId);
+
+    res.json({
+      student,
+      semester,
+      branchShort
+    });
+  } catch (err) {
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
+/* ------------------ COURSES ------------------ */
+
+app.get("/api/courses/:scholarId", async (req, res) => {
+  try {
+    const { scholarId } = req.params;
+
+    const semester = getCurrentSemesterFromScholarId(scholarId);
+    const branchCode = Number(scholarId.toString()[3]);
+
+    const current = await Course.findOne({
+      branchCode,
+      semester
+    });
+
+    const all = await Course.find({ branchCode }).sort({ semester: 1 });
+
+    res.json({
+      currentSemesterCourses: current?.courses || [],
+      allCourses: all
+    });
+  } catch (err) {
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
+/* ------------------ ATTENDANCE ------------------ */
+
 app.get("/api/attendance/:scholarId", async (req, res) => {
-  const data = await Attendance.findOne({
-    scholarId: req.params.scholarId
-  });
+  try {
+    const doc = await Attendance.findOne({
+      scholarId: req.params.scholarId
+    });
 
-  if (!data) return res.status(404).json({ error: "Not found" });
-  res.json(data);
+    if (!doc) return res.json({ attendance: [] });
+    res.json(doc);
+  } catch (err) {
+    res.status(500).json({ error: "Server error" });
+  }
 });
 
-// START SERVER
-const PORT = process.env.PORT || 5000;
+app.post("/api/attendance/update", async (req, res) => {
+  try {
+    const { scholarId, subjectCode, total, attended } = req.body;
+
+    let doc = await Attendance.findOne({ scholarId });
+    if (!doc) {
+      doc = new Attendance({ scholarId, attendance: [] });
+    }
+
+    const idx = doc.attendance.findIndex(
+      s => s.subjectCode === subjectCode
+    );
+
+    if (idx === -1) {
+      doc.attendance.push({ subjectCode, total, attended });
+    } else {
+      doc.attendance[idx].total = total;
+      doc.attendance[idx].attended = attended;
+    }
+
+    await doc.save();
+    res.json({ success: true });
+  } catch (err) {
+    res.status(500).json({ error: "Update failed" });
+  }
+});
+
+/* ------------------ START ------------------ */
+
+const PORT = process.env.PORT || 10000;
 app.listen(PORT, () =>
-  console.log("Server running on port", PORT)
+  console.log("Backend running on port", PORT)
 );
