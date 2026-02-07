@@ -14,6 +14,11 @@ app.use(express.json());
 
 connectDB();
 
+// Test route to verify routes work
+app.get("/test-profile", (req, res) => {
+  res.json({ message: "Profile route test works" });
+});
+
 /* ------------------ HELPERS ------------------ */
 
 function getCurrentSemesterFromScholarId(scholarId) {
