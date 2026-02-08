@@ -297,9 +297,9 @@ app.get("/api/profile/:scholarId", async (req, res) => {
         email: student.email,
         userName: student.userName,
         profileImage: student.profileImage || "default.png",
-        cgpa: student.cgpa ?? 0,
-        sgpa_curr: student.sgpa_curr ?? 0,
-        sgpa_prev: student.sgpa_prev ?? 0
+        cgpa: student.cgpa,
+        sgpa_curr: student.sgpa_curr,
+        sgpa_prev: student.sgpa_prev
       },
       semester,
       branchShort
