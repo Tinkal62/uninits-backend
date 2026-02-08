@@ -19,6 +19,17 @@ app.use(express.json());
 
 connectDB();
 
+// 🔧 SAFE helper to handle string + number scholarId
+async function findStudentSafe(scholarId) {
+  return Student.findOne({
+    $or: [
+      { scholarId: scholarId },
+      { scholarId: Number(scholarId) }
+    ]
+  });
+}
+
+
 // Test route to verify routes work
 app.get("/test-profile", (req, res) => {
   res.json({ message: "Profile route test works" });
@@ -30,7 +41,8 @@ app.get("/api/debug/check/:scholarId", async (req, res) => {
     const { scholarId } = req.params;
     console.log("🔍 Debug check for scholarId:", scholarId);
     
-    const student = await Student.findOne({ scholarId });
+    const student = await findStudentSafe(scholarId);
+
     console.log("Student found:", student ? "YES" : "NO");
     console.log("Student email:", student?.email);
     
@@ -56,7 +68,8 @@ app.get('/api/check-registration/:scholarId', async (req, res) => {
     console.log("🔍 Checking registration for:", scholarId);
     
     // Check if this scholarId exists
-    const student = await Student.findOne({ scholarId });
+    const student = await findStudentSafe(scholarId);
+
     console.log("Student found:", student ? "YES" : "NO");
     
     if (!student) {
@@ -127,7 +140,8 @@ app.post("/api/login", async (req, res) => {
     const { scholarId } = req.body;
     console.log("🔐 Login attempt for scholarId:", scholarId);
 
-    const student = await Student.findOne({ scholarId });
+    const student = await findStudentSafe(scholarId);
+
     
     // Student not found at all
     if (!student) {
@@ -200,7 +214,8 @@ app.post("/api/register", async (req, res) => {
     }
     
     // Check if student exists (with or without email)
-    let student = await Student.findOne({ scholarId });
+    const student = await findStudentSafe(scholarId);
+
     
     if (student) {
       // Update existing student - set email and userName
@@ -280,7 +295,8 @@ app.get("/api/profile/:scholarId", async (req, res) => {
     const { scholarId } = req.params;
     console.log("Looking for student:", scholarId);
 
-    const student = await Student.findOne({ scholarId });
+    const student = await findStudentSafe(scholarId);
+
     console.log("Student found:", student ? "YES" : "NO");
 
     if (!student) return res.status(404).json({ error: "Student not found" });
@@ -457,7 +473,8 @@ app.post('/api/profile/upload-photo', upload.single('profileImage'), async (req,
     console.log('File saved as:', req.file.filename);
     
     // Update student record in database with new profile picture filename
-    const student = await Student.findOne({ scholarId });
+    const student = await findStudentSafe(scholarId);
+
     if (!student) {
       return res.status(404).json({ error: 'Student not found' });
     }
