@@ -49,107 +49,6 @@ app.get("/", (req, res) => {
 
 
 
-
-
-
-// ------------------ ONE-TIME FIX: CLEAN UP DUPLICATE STUDENTS ------------------
-app.get("/api/fix/student-schema", async (req, res) => {
-  try {
-    // Find all students with String scholarId
-    const stringIdStudents = await Student.find({
-      scholarId: { $type: "string" }
-    });
-    
-    // Find all students with Number scholarId
-    const numberIdStudents = await Student.find({
-      scholarId: { $type: "number" }
-    });
-    
-    const results = {
-      stringCount: stringIdStudents.length,
-      numberCount: numberIdStudents.length,
-      deleted: [],
-      updated: []
-    };
-    
-    // For each String ID student, update or merge
-    for (const student of stringIdStudents) {
-      const numId = Number(student.scholarId);
-      const existingNumberStudent = await Student.findOne({ scholarId: numId });
-      
-      if (existingNumberStudent) {
-        // Merge data (keep the one with email, higher GPA, etc)
-        if (student.email && !existingNumberStudent.email) {
-          existingNumberStudent.email = student.email;
-        }
-        if (student.profileImage && student.profileImage !== 'default.png') {
-          existingNumberStudent.profileImage = student.profileImage;
-        }
-        await existingNumberStudent.save();
-        
-        // Delete the string version
-        await Student.deleteOne({ _id: student._id });
-        results.deleted.push(student.scholarId);
-      } else {
-        // Convert to Number
-        student.scholarId = numId;
-        await student.save();
-        results.updated.push(student.scholarId);
-      }
-    }
-    
-    res.json({
-      message: "✅ Student schema fix completed",
-      results
-    });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
-
-
-// ------------------ DEBUG: CHECK EXACT DATABASE BEING USED ------------------
-app.get("/api/debug/database-check", async (req, res) => {
-  try {
-    // Get the current database name
-    const currentDB = mongoose.connection.db.databaseName;
-    
-    // List all collections in current database
-    const collections = await mongoose.connection.db.listCollections().toArray();
-    const collectionNames = collections.map(c => c.name);
-    
-    // Try to count students in THIS database
-    let studentCount = 0;
-    try {
-      studentCount = await Student.countDocuments();
-    } catch(e) {
-      console.log("Student model error:", e.message);
-    }
-    
-    // Try to count attendance in THIS database
-    let attendanceCount = 0;
-    try {
-      attendanceCount = await Attendance.countDocuments();
-    } catch(e) {
-      console.log("Attendance model error:", e.message);
-    }
-    
-    res.json({
-      connectedDatabase: currentDB,
-      collections: collectionNames,
-      studentCount: studentCount,
-      attendanceCount: attendanceCount,
-      connectionState: mongoose.connection.readyState,
-      warning: currentDB !== "NITS-student" ? "⚠️ WRONG DATABASE! You are not connected to NITS-student" : "✅ Correct database"
-    });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
-
-
-
-
 // ------------------ CHECK REGISTRATION ROUTE ------------------
 app.get('/api/check-registration/:scholarId', async (req, res) => {
   try {
@@ -330,50 +229,6 @@ app.post("/api/register", async (req, res) => {
 
 
 
-
-
-
-
-// ------------------ TEST ROUTE - CHECK DATABASE DIRECTLY ------------------
-app.get("/api/test/student/:scholarId", async (req, res) => {
-  try {
-    const { scholarId } = req.params;
-    
-    // Try all possible matches
-    const student = await Student.findOne({
-      $or: [
-        { scholarId: scholarId },
-        { scholarId: Number(scholarId) }
-      ]
-    });
-    
-    if (!student) {
-      return res.json({ error: "Student not found" });
-    }
-    
-    // Return RAW MongoDB document
-    res.json({
-      message: "Raw student data from database",
-      scholarId: student.scholarId,
-      scholarId_type: typeof student.scholarId,
-      name: student.name,
-      cgpa: student.cgpa,
-      cgpa_type: typeof student.cgpa,
-      sgpa_curr: student.sgpa_curr,
-      sgpa_curr_type: typeof student.sgpa_curr,
-      sgpa_prev: student.sgpa_prev,
-      sgpa_prev_type: typeof student.sgpa_prev,
-      full_document: student
-    });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
-
-
-
-
-
 // ------------------ PROFILE ROUTE - STRICT DEBUG VERSION ------------------
 app.get("/api/profile/:scholarId", async (req, res) => {
   try {
@@ -426,16 +281,6 @@ app.get("/api/profile/:scholarId", async (req, res) => {
       console.log("⚠️ WARNING: cgpa is 0/null/undefined in database!");
     }
     
-    // MANUALLY SET VALUES FOR TESTING - REMOVE AFTER FIXED
-    // If database has values but they're not coming through, uncomment these lines:
-    /*
-    if (scholarId.toString() === "2415062") {
-      student.cgpa = 7.58;
-      student.sgpa_curr = 8.21;
-      student.sgpa_prev = 8.22;
-      console.log("🔧 MANUALLY SET TEST VALUES");
-    }
-    */
 
     const semester = getCurrentSemesterFromScholarId(scholarId);
     const branchShort = getBranchFromScholarId(scholarId);
