@@ -51,6 +51,63 @@ app.get("/", (req, res) => {
 
 
 
+
+// ------------------ ONE-TIME FIX: CLEAN UP DUPLICATE STUDENTS ------------------
+app.get("/api/fix/student-schema", async (req, res) => {
+  try {
+    // Find all students with String scholarId
+    const stringIdStudents = await Student.find({
+      scholarId: { $type: "string" }
+    });
+    
+    // Find all students with Number scholarId
+    const numberIdStudents = await Student.find({
+      scholarId: { $type: "number" }
+    });
+    
+    const results = {
+      stringCount: stringIdStudents.length,
+      numberCount: numberIdStudents.length,
+      deleted: [],
+      updated: []
+    };
+    
+    // For each String ID student, update or merge
+    for (const student of stringIdStudents) {
+      const numId = Number(student.scholarId);
+      const existingNumberStudent = await Student.findOne({ scholarId: numId });
+      
+      if (existingNumberStudent) {
+        // Merge data (keep the one with email, higher GPA, etc)
+        if (student.email && !existingNumberStudent.email) {
+          existingNumberStudent.email = student.email;
+        }
+        if (student.profileImage && student.profileImage !== 'default.png') {
+          existingNumberStudent.profileImage = student.profileImage;
+        }
+        await existingNumberStudent.save();
+        
+        // Delete the string version
+        await Student.deleteOne({ _id: student._id });
+        results.deleted.push(student.scholarId);
+      } else {
+        // Convert to Number
+        student.scholarId = numId;
+        await student.save();
+        results.updated.push(student.scholarId);
+      }
+    }
+    
+    res.json({
+      message: "✅ Student schema fix completed",
+      results
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+
 // ------------------ DEBUG: CHECK EXACT DATABASE BEING USED ------------------
 app.get("/api/debug/database-check", async (req, res) => {
   try {

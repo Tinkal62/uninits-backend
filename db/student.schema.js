@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const studentSchema = new mongoose.Schema({
-  scholarId: { type: Number, required: true, unique: true },
+  scholarId: { type: String, required: true, unique: true }, // CHANGED to String
   email: { type: String, default: null },
   userName: { type: String, required: true },
   name: { type: String },
@@ -11,7 +11,7 @@ const studentSchema = new mongoose.Schema({
   sgpa_prev: { type: Number, default: 0 }
 }, {
   timestamps: true,
-  collection: 'students' // FORCE the collection name to be 'students'
+  collection: 'students'
 });
 
 module.exports = mongoose.model('Student', studentSchema);
