@@ -48,39 +48,26 @@ app.get("/", (req, res) => {
 
 
 
-// ------------------ DEBUG: LIST ALL STUDENTS ------------------
-app.get("/api/debug/all-students", async (req, res) => {
+
+
+// ------------------ DEBUG: CHECK DATABASE CONNECTION ------------------
+app.get("/api/debug/db", async (req, res) => {
   try {
-    const students = await Student.find({}).select('scholarId name email cgpa sgpa_curr sgpa_prev profileImage');
+    const dbState = mongoose.connection.readyState;
+    const states = ['disconnected', 'connected', 'connecting', 'disconnecting'];
     
-    console.log("========== ALL STUDENTS IN DATABASE ==========");
-    students.forEach((s, i) => {
-      console.log(`${i+1}. ScholarId: ${s.scholarId} (${typeof s.scholarId})`);
-      console.log(`   Name: ${s.name}`);
-      console.log(`   Email: ${s.email || 'NO EMAIL'}`);
-      console.log(`   CGPA: ${s.cgpa}`);
-      console.log(`   SGPA Curr: ${s.sgpa_curr}`);
-      console.log(`   SGPA Prev: ${s.sgpa_prev}`);
-      console.log(`   Profile: ${s.profileImage}`);
-      console.log('---');
-    });
-    console.log("===============================================");
+    const info = {
+      connectionState: states[dbState] || 'unknown',
+      databaseName: mongoose.connection.db?.databaseName || 'unknown',
+      collections: []
+    };
     
-    res.json({
-      count: students.length,
-      students: students.map(s => ({
-        scholarId: s.scholarId,
-        scholarIdType: typeof s.scholarId,
-        name: s.name,
-        email: s.email,
-        cgpa: s.cgpa,
-        sgpa_curr: s.sgpa_curr,
-        sgpa_prev: s.sgpa_prev,
-        profileImage: s.profileImage,
-        hasEmail: !!s.email,
-        isRegistered: !!s.email
-      }))
-    });
+    if (mongoose.connection.db) {
+      const collections = await mongoose.connection.db.listCollections().toArray();
+      info.collections = collections.map(c => c.name);
+    }
+    
+    res.json(info);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
