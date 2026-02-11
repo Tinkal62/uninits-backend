@@ -10,7 +10,8 @@ const studentSchema = new mongoose.Schema({
   sgpa_curr: { type: Number, default: 0 },
   sgpa_prev: { type: Number, default: 0 }
 }, {
-  timestamps: true
+  timestamps: true,
+  collection: 'students' // FORCE the collection name to be 'students'
 });
 
 module.exports = mongoose.model('Student', studentSchema);

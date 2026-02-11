@@ -51,26 +51,41 @@ app.get("/", (req, res) => {
 
 
 
-/// ------------------ DEBUG: CHECK DATABASE CONNECTION ------------------
-app.get("/api/debug/db", async (req, res) => {
+// ------------------ DEBUG: CHECK EXACT DATABASE BEING USED ------------------
+app.get("/api/debug/database-check", async (req, res) => {
   try {
-    const dbState = mongoose.connection.readyState;
-    const states = ['disconnected', 'connected', 'connecting', 'disconnecting'];
+    // Get the current database name
+    const currentDB = mongoose.connection.db.databaseName;
     
-    const info = {
-      connectionState: states[dbState] || 'unknown',
-      databaseName: mongoose.connection.db?.databaseName || 'unknown',
-      collections: []
-    };
+    // List all collections in current database
+    const collections = await mongoose.connection.db.listCollections().toArray();
+    const collectionNames = collections.map(c => c.name);
     
-    if (mongoose.connection.db) {
-      const collections = await mongoose.connection.db.listCollections().toArray();
-      info.collections = collections.map(c => c.name);
+    // Try to count students in THIS database
+    let studentCount = 0;
+    try {
+      studentCount = await Student.countDocuments();
+    } catch(e) {
+      console.log("Student model error:", e.message);
     }
     
-    res.json(info);
+    // Try to count attendance in THIS database
+    let attendanceCount = 0;
+    try {
+      attendanceCount = await Attendance.countDocuments();
+    } catch(e) {
+      console.log("Attendance model error:", e.message);
+    }
+    
+    res.json({
+      connectedDatabase: currentDB,
+      collections: collectionNames,
+      studentCount: studentCount,
+      attendanceCount: attendanceCount,
+      connectionState: mongoose.connection.readyState,
+      warning: currentDB !== "NITS-student" ? "⚠️ WRONG DATABASE! You are not connected to NITS-student" : "✅ Correct database"
+    });
   } catch (error) {
-    console.error("Debug route error:", error);
     res.status(500).json({ error: error.message });
   }
 });

@@ -1,29 +1,31 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const connectDB = async () => {
   try {
     const uri = process.env.MONGO_URI;
     
-    // Log URI without password
+    // CRITICAL: Force the database name in the connection string
+    // Make sure it ends with /NITS-student
+    if (!uri.includes('/NITS-student')) {
+      console.error("❌ URI is missing database name! It should end with /NITS-student");
+    }
+    
     const sanitizedUri = uri.replace(/:[^:@]*@/, ':****@');
     console.log("🔌 Connecting to:", sanitizedUri);
     
-    // Simple connection - Mongoose 7+ doesn't need those options
-    await mongoose.connect(uri);
+    await mongoose.connect(uri, {
+      dbName: 'NITS-student' // FORCE the database name
+    });
     
     console.log("✅ MongoDB Atlas connected!");
-    console.log("📊 Database:", mongoose.connection.db.databaseName);
+    console.log("📊 Connected to database:", mongoose.connection.db.databaseName);
     
-    // Send a ping to confirm connection
-    await mongoose.connection.db.admin().command({ ping: 1 });
-    console.log("🏓 Ping successful!");
-    
-    // List collections
+    // List all collections
     const collections = await mongoose.connection.db.listCollections().toArray();
-    console.log("📚 Collections:", collections.map(c => c.name).join(', '));
+    console.log("📚 Collections in this database:", collections.map(c => c.name).join(', '));
     
   } catch (err) {
-    console.error("❌ MongoDB connection failed:", err.message);
+    console.error("❌ MongoDB connection error:", err.message);
     process.exit(1);
   }
 };
