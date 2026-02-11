@@ -46,6 +46,49 @@ app.get("/", (req, res) => {
   res.json({ status: "Backend running", message: "uniNITS Backend API" });
 });
 
+
+
+// ------------------ DEBUG: LIST ALL STUDENTS ------------------
+app.get("/api/debug/all-students", async (req, res) => {
+  try {
+    const students = await Student.find({}).select('scholarId name email cgpa sgpa_curr sgpa_prev profileImage');
+    
+    console.log("========== ALL STUDENTS IN DATABASE ==========");
+    students.forEach((s, i) => {
+      console.log(`${i+1}. ScholarId: ${s.scholarId} (${typeof s.scholarId})`);
+      console.log(`   Name: ${s.name}`);
+      console.log(`   Email: ${s.email || 'NO EMAIL'}`);
+      console.log(`   CGPA: ${s.cgpa}`);
+      console.log(`   SGPA Curr: ${s.sgpa_curr}`);
+      console.log(`   SGPA Prev: ${s.sgpa_prev}`);
+      console.log(`   Profile: ${s.profileImage}`);
+      console.log('---');
+    });
+    console.log("===============================================");
+    
+    res.json({
+      count: students.length,
+      students: students.map(s => ({
+        scholarId: s.scholarId,
+        scholarIdType: typeof s.scholarId,
+        name: s.name,
+        email: s.email,
+        cgpa: s.cgpa,
+        sgpa_curr: s.sgpa_curr,
+        sgpa_prev: s.sgpa_prev,
+        profileImage: s.profileImage,
+        hasEmail: !!s.email,
+        isRegistered: !!s.email
+      }))
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+
+
+
 // ------------------ CHECK REGISTRATION ROUTE ------------------
 app.get('/api/check-registration/:scholarId', async (req, res) => {
   try {
@@ -78,18 +121,25 @@ app.get('/api/check-registration/:scholarId', async (req, res) => {
   }
 });
 
-// ------------------ LOGIN ROUTE ------------------
+
+
+// ------------------ LOGIN ROUTE - WITH DUPLICATE HANDLING ------------------
 app.post("/api/login", async (req, res) => {
   try {
     const { scholarId } = req.body;
-    const student = await findStudentSafe(scholarId);
+    const numericScholarId = Number(scholarId);
+    
+    // Find the student with email (registered one)
+    let student = await Student.findOne({ 
+      scholarId: numericScholarId,
+      email: { $exists: true, $ne: null }
+    });
 
     if (!student) {
-      return res.status(404).json({ success: false, error: "Student not found. Please register first." });
-    }
-
-    if (!student.email) {
-      return res.status(403).json({ success: false, error: "Registration incomplete. Please complete registration first.", requiresRegistration: true });
+      return res.status(404).json({ 
+        success: false, 
+        error: "Student not found. Please register first." 
+      });
     }
 
     res.json({
@@ -106,11 +156,16 @@ app.post("/api/login", async (req, res) => {
       }
     });
   } catch (err) {
+    console.error("❌ Login error:", err);
     res.status(500).json({ success: false, error: "Server error during login" });
   }
 });
 
-// ------------------ REGISTER ROUTE ------------------
+
+
+
+
+// ------------------ REGISTER ROUTE - WITH DUPLICATE PREVENTION ------------------
 app.post("/api/register", async (req, res) => {
   try {
     const { scholarId, email, userName } = req.body;
@@ -123,16 +178,53 @@ app.post("/api/register", async (req, res) => {
       return res.status(400).json({ success: false, error: "Please use a valid NIT Silchar email address" });
     }
 
-    let student = await findStudentSafe(scholarId);
+    console.log("📝 Registration attempt for:", { scholarId, email, userName });
+    console.log("Current database:", mongoose.connection.db.databaseName);
+
+    // IMPORTANT: Convert scholarId to Number for consistent storage
+    const numericScholarId = Number(scholarId);
+    
+    // FIRST: Delete ANY existing student with this scholarId that has NO email
+    // This cleans up the duplicate entries
+    const deleteResult = await Student.deleteMany({ 
+      scholarId: numericScholarId,
+      email: { $exists: false }
+    });
+    
+    if (deleteResult.deletedCount > 0) {
+      console.log(`🗑️ Deleted ${deleteResult.deletedCount} incomplete student record(s)`);
+    }
+    
+    // NOW find OR create the student
+    let student = await Student.findOne({ scholarId: numericScholarId });
 
     if (student) {
+      console.log("🔄 Updating existing student:", student.scholarId);
+      console.log("Before update - email:", student.email, "CGPA:", student.cgpa);
+      
+      // Preserve GPA values if they exist
+      const existingCGPA = student.cgpa;
+      const existingSGPA_curr = student.sgpa_curr;
+      const existingSGPA_prev = student.sgpa_prev;
+      
       student.email = email;
       student.userName = userName;
       student.name = userName;
+      
+      // Make sure we don't overwrite GPA with 0
+      if (existingCGPA > 0) student.cgpa = existingCGPA;
+      if (existingSGPA_curr > 0) student.sgpa_curr = existingSGPA_curr;
+      if (existingSGPA_prev > 0) student.sgpa_prev = existingSGPA_prev;
+      
       await student.save();
+      
+      console.log("After update - email:", student.email, "CGPA:", student.cgpa);
+      
     } else {
+      console.log("🆕 Creating new student with scholarId:", numericScholarId);
+      
       student = new Student({
-        scholarId,
+        scholarId: numericScholarId,
         email,
         userName,
         name: userName,
@@ -141,24 +233,36 @@ app.post("/api/register", async (req, res) => {
         sgpa_curr: 0,
         sgpa_prev: 0
       });
+      
       await student.save();
     }
+
+    // Get the final student record
+    const savedStudent = await Student.findOne({ scholarId: numericScholarId });
+    
+    console.log("✅ Registration completed. Final record:", {
+      scholarId: savedStudent.scholarId,
+      email: savedStudent.email,
+      cgpa: savedStudent.cgpa
+    });
 
     res.json({
       success: true,
       message: "Registration successful",
       student: {
-        scholarId: student.scholarId,
-        name: student.name,
-        email: student.email,
-        userName: student.userName,
-        profileImage: student.profileImage || "default.png",
-        cgpa: student.cgpa || 0,
-        sgpa_curr: student.sgpa_curr || 0,
-        sgpa_prev: student.sgpa_prev || 0
+        scholarId: savedStudent.scholarId,
+        name: savedStudent.name,
+        email: savedStudent.email,
+        userName: savedStudent.userName,
+        profileImage: savedStudent.profileImage || "default.png",
+        cgpa: savedStudent.cgpa || 0,
+        sgpa_curr: savedStudent.sgpa_curr || 0,
+        sgpa_prev: savedStudent.sgpa_prev || 0
       }
     });
+    
   } catch (err) {
+    console.error("❌ Registration error:", err);
     res.status(500).json({ success: false, error: "Registration failed. Please try again." });
   }
 });
