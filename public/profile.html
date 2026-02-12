@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Profile | uniNITS</title>
+  <link rel="icon" href="/assets/images/logo.png" type="image/png">
+  <link rel="stylesheet" href="/css/index.css?v=3">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<style>
+  #profileImage, #navProfileImage {
+    pointer-events: none; /* Prevent other scripts from interfering */
+  }
+</style>
+</head>
+
+<body>
+<div class="main-content">
+
+  <!-- Navbar will be loaded here -->
+  <div id="navbar-container"></div>
+
+<!-- ================= PROFILE HERO ================= -->
+<section class="section profile-section">
+
+  <div class="event-card profile-card">
+
+    <div class="edit-avatar" style="position:relative; width:90px; height:90px;">
+
+      <div class="avatar" style="width:90px; height:90px;">
+        <img id="profileImage" src="/assets/images/default.png" />
+      </div>
+
+      <label for="profileUpload" class="edit-button">
+        <i class="fa-regular fa-pen-to-square"></i>
+      </label>
+
+      <input type="file" id="profileUpload" hidden accept="image/*" />
+
+    </div>
+
+    <div style="text-align:right;">
+      <h2 class="gradient-text"><span id="studentName">Loading...</span></h2>
+      <p><b>Scholar ID:</b> <span id="studentScholarId">--</span></p>
+      <p><b>Email:</b> <span id="studentEmail">--</span></p>
+
+      <div style="margin-top:10px;">
+        <span class="dept-sem" id="branchShort">--</span>
+        <span class="dept-sem" id="currentSemester">--</span>
+      </div>
+      
+      <!-- Logout Button -->
+      <button class="btn-primary" id="logoutBtn">
+        <i class="fas fa-sign-out-alt"></i> Logout
+      </button>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= ACADEMIC STATS ================= -->
+<section class="section">
+  <h2 class="section-title gradient-text">Academic Overview</h2>
+
+  <div class="tools-stats-grid">
+    <div class="tool-stat-card gradient-11">
+      <h4>CGPA</h4>
+      <p style="font-size:2rem;" id="cgpa">--</p>
+    </div>
+
+    <div class="tool-stat-card gradient-12">
+      <h4>Current SGPA</h4>
+      <p style="font-size:2rem;" id="sgpaCurr">--</p>
+    </div>
+
+    <div class="tool-stat-card gradient-13">
+      <h4>Previous SGPA</h4>
+      <p style="font-size:2rem;" id="sgpaPrev">--</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ================= CURRENT SEM SUBJECTS ================= -->
+<section class="section profile-section">
+  <h2 class="section-title gradient-text">Current Sem Subjects & Attendance</h2>
+
+  <div class="event-list curr-sem-list" id="currentSemList">
+    <!-- Dynamic content will be inserted here by JavaScript -->
+  </div>
+
+  <a href="/attendance.html">
+    <button class="btn-primary mt-4">
+      <i class="fa fa-edit"></i> Update Attendance
+    </button>
+  </a>
+</section>
+
+<!-- ================= ALL SUBJECTS ================= -->
+<section class="section" style="margin-top: 50px;">
+  <h2 class="section-title gradient-text">
+    All Subjects – <span id="branchShortTitle">--</span>
+  </h2>
+
+  <div class="all-subjects-container">
+    <div id="semesterList"></div>
+    <div id="semesterBlocks"></div>
+  </div>
+</section>
+
+  <!-- Footer will be loaded here -->
+  <div id="footer-container"></div>
+
+</div>
+
+
+<script src="/js/auth-check.js"></script>
+<script src="/js/logout.js"></script>
+<script src="/js/profile.js"></script>
+<script src="/js/components.js"></script> 
+
+
+</body>
+</html>

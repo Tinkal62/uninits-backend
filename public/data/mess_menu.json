@@ -1,0 +1,72 @@
+[
+  {
+    "day": "Sunday",
+    "breakfast": "Bread/Butter/Fruit/Jam or Sattu Paratha, Tea, Milk or boiled Egg, Banana, Sprouts",
+    "lunch": "Rice, Roti, Sambar, Pumpkin Fry, Mixed veg curry, Fryums, Salad",
+    "snacks": "Veg Roll, Tea",
+    "dinner": {
+      "veg": "Kadai Paneer, Paneer fry, Pulao, Methi Puri, Dhal Makhni, Lassi",
+      "non-veg": "Kadai Chicken Curry, Chicken fry, Pulao, Methi Puri, Dhal Makhni, Lassi"
+    }
+  },
+  {
+    "day": "Monday",
+    "breakfast": "Bread/Butter/Fruit/Jam or Idli Sambar with Chetney, Tea, Milk or Boiled Egg, Banana, Sprouts",
+    "lunch": "Rice, Dal, Roti, Seasonal Sabji Fry, Rajma Curry (gravy), Papad, Lemon Onion",
+    "snacks": "Pakoda, Tea",
+    "dinner": {
+      "veg": "Butter Paneer Curry, Rice, Dal, Roti, Mixed Veg curry, Sewai",
+      "non-veg": "Butter Chicken Curry, Rice, Dal, Roti, Mixed Veg curry, Sewai"
+    }
+  },
+  {
+    "day": "Tuesday",
+    "breakfast": "Bread/Butter/Fruit/Jam or Aloo Paratha with Pickle, Coffee, Milk or Omelet, Banana, Sprouts",
+    "lunch": "Rice, Roti, Sambar, Masala Channa Fry, Kadhi Pakoda, Fryums, Lemon",
+    "snacks": "Veg Sandwich, Tea",
+    "dinner": {
+      "veg": "Mushroom Masala/Baby Corn Masala, Rice, Dal, Roti, Mixed Veg Curry, Banana Shake",
+      "non-veg": "Egg Curry, Rice, Dal, Roti, Mixed Veg Curry, Banana Shake"
+    }
+  },
+  {
+    "day": "Wednesday",
+    "breakfast": "Bread/Butter/Fruit/Jam or Masala Dosa with Sambar/Chetney, Tea, Milk or Boiled Egg, Banana, Sprouts",
+    "lunch": "Rice, Dal, Roti, Seasonal Sabji Fry, Gobi Manchurian, Papad, Salad",
+    "snacks": "Samosa, Tea",
+    "dinner": {
+      "veg": "Chilli Paneer Curry, Rice, Dal, Roti, Mixed Veg curry, Fruit Salad",
+      "non-veg": "Garlic Chicken Curry, Rice, Dal, Roti, Mixed Veg curry, Fruit Salad"
+    }
+  },
+  {
+    "day": "Thursday",
+    "breakfast": "Bread/Butter/Fruit/Jam or Chola Bhatura, Coffee, Milk, Banana, Sprouts",
+    "lunch": "Rice, Dal, Roti, Mixed Dal, Potato French Fry, Mixed Veg curry, Dahi, Papad",
+    "snacks": "Bread Pakoda, Tea",
+    "dinner": {
+      "veg": "Shahi Paneer, Rice, Dal, Roti, Mixed Veg curr, Rice Kheer",
+      "non-veg": "Rice, Dal, Roti, Mixed Veg curr, Rice Kheer"
+    }
+  },
+  {
+    "day": "Friday",
+    "breakfast": "Bread/Butter/Fruit/Jam or Puri with Aloo matar, Tea, Milk or boiled Egg, Banana, Sprouts",
+    "lunch": "Rice, Dal Frt, Roti, Gobi Fry/Brinjal Fry, Veg kopta curry, Papad, Lemon",
+    "snacks": "Aloo Chop, Tea",
+    "dinner": {
+      "veg": "Paneer Biryani, Dal, Roti, Raita, Separate Gravy, Sweet (Gulabjamun/Rasgulla)",
+      "non-veg": "Chicken Biryani, Dal, Roti, Raita, Separate Gravy, Sweet (Gulabjamun/Rasgulla)"
+    }
+  },
+  {
+    "day": "Saturday",
+    "breakfast": "Bread/Butter/Fruit with Jam or Uttapam with Sambar/Chetney, Tea, Milk or omelet, Banana, Sprouts",
+    "lunch": "Dal, Roti, Khichdi, Seasonal Sabji Fry, Sweet Chutney, Dahi, Papad, Lemon",
+    "snacks": "Chat, Tea",
+    "dinner": {
+      "veg": "Mutter Paneer, Rice, Dal, Roti, Mixed Veg Curry, Fruit Juice",
+      "non-veg": "Fish Masala, Rice, Dal, Roti, Mixed Veg Curry, Fruit Juice"
+    }
+  }
+]

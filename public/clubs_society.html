@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Clubs & Societies | uniNITS</title>
+  <link rel="icon" href="/assets/images/logo.png" type="image/png">
+  <link rel="stylesheet" href="/css/index.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body class="club-body">
+  
+  <div class="main-content">
+    <!-- Navbar will be loaded here -->
+    <div id="navbar-container"></div>
+
+    <!-- ================= HERO SECTION ================= -->
+    <section class="hero" style="min-height: 40vh; padding-top: 100px;">
+      <div class="hero-card" style="max-width: 1000px;">
+        <h1 class="gradient-text">Clubs & Societies</h1>
+        <p class="hero-description">
+          Explore the vibrant campus life at NIT Silchar through various clubs, branch societies, and committees. 
+          Join communities that match your interests and skills!
+        </p>
+        
+        <!-- Search Box -->
+        <div class="search-container">
+          <input type="text" 
+                 class="search-box" 
+                 placeholder="Search for clubs, societies, or committees..."
+                 id="searchInput">
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CLUBS & SOCIETIES CONTENT ================= -->
+    <section class="section">
+      <div class="clubs-container">
+        
+        <!-- CLUBS SECTION -->
+        <h2 class="section-header clubs-header">
+          <i class="fas fa-users"></i> Student Clubs
+        </h2>
+        <div class="clubs-grid" id="clubs-section">
+          <!-- Clubs will be loaded here dynamically -->
+        </div>
+        
+        <!-- BRANCH SOCIETIES SECTION -->
+        <h2 class="section-header societies-header" id="branch_socity">
+          <i class="fas fa-graduation-cap"></i> Branch Societies
+        </h2>
+        <div class="clubs-grid" id="societies-section">
+          <!-- Societies will be loaded here dynamically -->
+        </div>
+        
+        <!-- OTHER COMMITTEES SECTION -->
+        <h2 class="section-header others-header">
+          <i class="fas fa-head-side-virus"></i> Societies & Others
+        </h2>
+        <div class="clubs-grid" id="others-section">
+          <!-- Others will be loaded here dynamically -->
+        </div>
+        
+        <!-- No Results Message (hidden by default) -->
+        <div class="no-results" id="noResults" style="display: none;">
+          <h3>No clubs or societies found</h3>
+          <p>Try searching with different keywords</p>
+        </div>
+        
+      </div>
+    </section>
+
+    <!-- Footer will be loaded here -->
+    <div id="footer-container"></div>
+  </div>
+
+  <script src="/js/auth-check.js"></script>
+  <script src="/js/logout.js"></script>
+  <script src="/js/components.js"></script>
+  <script src="/js/clubs.js?v=1"></script>
+</body>
+</html>

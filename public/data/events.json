@@ -1,0 +1,296 @@
+{
+  "semesters": [
+    {
+      "title": "Even Semester 2026",
+      "events": [
+        {
+          "serial": 1,
+          "description": "Even semester registration Time Line in Even sem 2026",
+          "date": "Early January 2026",
+          "date_parsed": "2026-01-05",
+          "date_range": "Early January 2026",
+          "remark": "NA"
+        },
+        {
+          "serial": 2,
+          "description": "Publication of Provisional Roll Sheet",
+          "date": "5th to 7th Jan 2026",
+          "date_parsed": "2026-01-05",
+          "date_range": "5th to 7th Jan 2026",
+          "remark": "NA"
+        },
+        {
+          "serial": 3,
+          "description": "First day of Instructions, Course instructors to provide (i) lecture and evaluation",
+          "date": "8th Jan 2026",
+          "date_parsed": "2026-01-08",
+          "date_range": "8th Jan 2026",
+          "remark": "NA"
+        },
+        {
+          "serial": 4,
+          "description": "Last date to show End semester answer scripts",
+          "date": "12th Jan 2026",
+          "date_parsed": "2026-01-12",
+          "date_range": "12th Jan 2026",
+          "remark": "NA"
+        },
+        {
+          "serial": 5,
+          "description": "Last date of late registration with fine (with proper justification) within",
+          "date": "16th Jan 2026",
+          "date_parsed": "2026-01-16",
+          "date_range": "16th Jan 2026",
+          "remark": "NA"
+        },
+        {
+          "serial": 6,
+          "description": "Final Roll Sheet publication by the academic section",
+          "date": "16th Jan 2026",
+          "date_parsed": "2026-01-16",
+          "date_range": "16th Jan 2026",
+          "remark": "NA"
+        },
+        {
+          "serial": 7,
+          "description": "Last date of Submission of corrected Grades if any",
+          "date": "19th Jan 2026",
+          "date_parsed": "2026-01-19",
+          "date_range": "19th Jan 2026",
+          "remark": "NA"
+        },
+        {
+          "serial": 8,
+          "description": "Publication of Final Roll sheet",
+          "date": "20th Jan 2026",
+          "date_parsed": "2026-01-20",
+          "date_range": "20th Jan 2026",
+          "remark": "NA"
+        },
+        {
+          "serial": 9,
+          "description": "Announcement of the first monthly attendance report in the respective class and submit the same to HoD",
+          "date": "31st Jan 2026",
+          "date_parsed": "2026-01-31",
+          "date_range": "31st Jan 2026",
+          "remark": "NA"
+        },
+        {
+          "serial": 10,
+          "description": "Incandescence",
+          "date": "05 February (evening) - 08 February 2026",
+          "date_parsed": "2026-02-17",
+          "date_range": "13 February - 16 February 2026",
+          "remark": "important"
+        },
+        {
+          "serial": 11,
+          "description": "Deadline for Mid-Semester Moderated Question Papers Submission",
+          "date": "16th Feb 2026",
+          "date_parsed": "2026-02-16",
+          "date_range": "16th Feb 2026",
+          "remark": "NA"
+        },
+        {
+          "serial": 12,
+          "description": "Mid semester examination for theory subjects",
+          "date": "23rd Feb to 2nd March 2026",
+          "date_parsed": "2026-02-23",
+          "date_range": "23rd Feb to 2nd March 2026",
+          "remark": "important"
+        },
+        {
+          "serial": 13,
+          "description": "Announcement of the second monthly attendance report in the respective class and submit the same to HoD",
+          "date": "2nd March 2026",
+          "date_parsed": "2026-03-02",
+          "date_range": "2nd March 2026",
+          "remark": "NA"
+
+        },
+        {
+          "serial": 14,
+          "description": "Mid semester project evaluation to be completed within (wherever applicable)",
+          "date": "5th March 2026",
+          "date_parsed": "2026-03-05",
+          "date_range": "5th March 2026",
+          "remark": "NA"
+        },
+        {
+          "serial": 15,
+          "description": "Last date of showing mid semester marks to the students",
+          "date": "13th March 2026",
+          "date_parsed": "2026-03-13",
+          "date_range": "13th March 2026",
+          "remark": "important"
+        },
+        {
+          "serial": 16,
+          "description": "Announcement of the third monthly attendance report in the respective class and submit the same to HoD",
+          "date": "1st April 2026",
+          "date_parsed": "2026-04-01",
+          "date_range": "1st April 2026",
+          "remark": "NA"
+        },
+        {
+          "serial": 17,
+          "description": "Minor Test to be Completed After Mid Sem and Before End Sem",
+          "date": "To be announced",
+          "date_parsed": "2026-04-24",
+          "date_range": "To be announced",
+          "remark": "important"
+        },
+        {
+          "serial": 18,
+          "description": "Departmental Time table (Odd Sem) Submission within",
+          "date": "24th April 2026",
+          "date_parsed": "2026-04-24",
+          "date_range": "24th April 2026",
+          "remark": "NA"
+        },
+        {
+          "serial": 19,
+          "description": "End-Semester Lab Exam to be Completed",
+          "date": "24th April to 1st May 2026",
+          "date_parsed": "2026-04-24",
+          "date_range": "24th April to 1st May 2026",
+          "remark": "important"
+        },
+        {
+          "serial": 20,
+          "description": "Deadline for End Semester Moderated Question Paper Submission",
+          "date": "27th April 2026",
+          "date_parsed": "2026-04-27",
+          "date_range": "27th April 2026",
+          "remark": "NA"
+        },
+        {
+          "serial": 21,
+          "description": "Last date of addition/deletion/modification of Elective subjects of the list to the Academic section (where applicable) by the department for next odd semester",
+          "date": "27th April 2026",
+          "date_parsed": "2026-04-27",
+          "date_range": "27th April 2026",
+          "remark": "NA"
+        },
+        {
+          "serial": 22,
+          "description": "Last date of instructions",
+          "date": "30th April 2026",
+          "date_parsed": "2026-04-30",
+          "date_range": "30th April 2026",
+          "remark": "NA"
+        },
+        {
+          "serial": 23,
+          "description": "Submission of Feedback form",
+          "date": "1st May 2026",
+          "date_parsed": "2026-05-01",
+          "date_range": "1st May 2026",
+          "remark": "important"
+        },
+        {
+          "serial": 24,
+          "description": "Announcement of the attendance report in the respective class and submit the same to HoD",
+          "date": "1st May 2026",
+          "date_parsed": "2026-05-01",
+          "date_range": "1st May 2026",
+          "remark": "NA"
+        },
+        {
+          "serial": 25,
+          "description": "End Semester examination for Theory subjects",
+          "date": "4th May to 12th May 2026",
+          "date_parsed": "2026-05-04",
+          "date_range": "4th May to 12th May 2026",
+          "remark": "important"
+        },
+        {
+          "serial": 26,
+          "description": "End semester Project to be completed within",
+          "date": "18th May 2026",
+          "date_parsed": "2026-05-18",
+          "date_range": "18th May 2026",
+          "remark": "important"
+        },
+        {
+          "serial": 27,
+          "description": "Summer Break for Students",
+          "date": "13th May to 12th July 2026",
+          "date_parsed": "2026-05-13",
+          "date_range": "13th May to 12th July 2026",
+          "remark": "important"
+        },
+        {
+          "serial": 28,
+          "description": "Last Date of Submission of Marks in ERP System",
+          "date": "20th May 2026",
+          "date_parsed": "2026-05-20",
+          "date_range": "20th May 2026",
+          "remark": "NA"
+        },
+        {
+          "serial": 29,
+          "description": "Last Date of Submission of Grade Sheet to Dean (Acad) Office",
+          "date": "22nd May 2026",
+          "date_parsed": "2026-05-22",
+          "date_range": "22nd May 2026",
+          "remark": "NA"
+        },
+        {
+          "serial": 30,
+          "description": "Central time Table (Odd Semester) Announcement",
+          "date": "25th May 2026",
+          "date_parsed": "2026-05-25",
+          "date_range": "25th May 2026",
+          "remark": "important"
+        }
+      ]
+    },
+    {
+      "title": "Odd Semester 2026",
+      "events": [
+        {
+          "serial": 31,
+          "description": "Declaration of End Semester Exam Results",
+          "date": "29th May 2026",
+          "date_parsed": "2026-05-29",
+          "date_range": "29th May 2026",
+          "remark": "important"
+        },
+        {
+          "serial": 32,
+          "description": "Summer Break for Faculty Members",
+          "date": "21st May to 12th July 2026",
+          "date_parsed": "2026-05-21",
+          "date_range": "21st May to 12th July 2026",
+          "remark": "important"
+        },
+        {
+          "serial": 33,
+          "description": "Odd Semester Registration",
+          "date": "13th July to 15th July 2026",
+          "date_parsed": "2026-07-13",
+          "date_range": "13th July to 15th July 2026",
+          "remark": "important"
+        },
+        {
+          "serial": 34,
+          "description": "First Day of Instruction",
+          "date": "16th July 2026",
+          "date_parsed": "2026-07-16",
+          "date_range": "16th July 2026",
+          "remark": "important"
+        },
+        {
+          "serial": 35,
+          "description": "Submission of I Grade for current semester to appropriate Letter Grade within",
+          "date": "3rd August 2026",
+          "date_parsed": "2026-08-03",
+          "date_range": "3rd August 2026",
+          "remark": "NA"
+        }
+      ],
+      "note": "* A faculty can avail maximum number of days in summer vacation or can avail both summer and winter vacation provided total number of days should not exceed 60 days."
+    }
+  ]
+}
