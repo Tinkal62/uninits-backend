@@ -1,198 +1,123 @@
-🎓 uniNITS – NIT Silchar Student Portal
+<div align="center">
 
+# 🎓 uniNITS  
+### NIT Silchar Student Portal  
 
+<img src="public/assets/images/logo.png" width="120"/>
 
+### 🚀 One Platform. Entire Campus. Endless Possibilities.
 
+<br/>
 
+![Version](https://img.shields.io/badge/version-1.0.0-1a237e?style=for-the-badge)
+![Frontend](https://img.shields.io/badge/Frontend-Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)
+![Backend](https://img.shields.io/badge/Backend-Render-46E3B7?style=for-the-badge&logo=render&logoColor=black)
+![Database](https://img.shields.io/badge/Database-MongoDB_Atlas-47A248?style=for-the-badge&logo=mongodb&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
+</div>
 
+---
 
+## 📌 About the Project
 
+**uniNITS** is a full-stack digital ecosystem built exclusively for **NIT Silchar students**.
 
-<div align="center"> <img src="public/assets/images/logo.png" alt="uniNITS Logo" width="120"/> <h3>One Platform. Entire Campus. Endless Possibilities.</h3> </div>
-📌 Overview
+It centralizes:
 
-uniNITS is a full-stack campus portal built for NIT Silchar students, integrating academics, events, hostels, clubs, and student services into one seamless digital ecosystem.
+- 📊 Academics  
+- 📅 Campus Events  
+- 🏠 Hostel Information  
+- 🍽️ Mess Menu  
+- 👥 Clubs & Societies  
 
-Instead of switching between multiple platforms, students can manage everything — attendance, CGPA, events, hostel info, and more — from a single dashboard.
+into a single, responsive and modern web application.
 
-✨ Features
-🔐 Authentication
+Instead of juggling multiple portals, students manage everything from **one unified dashboard**.
 
-Secure student login & registration
+---
 
-Profile management with avatar upload
+# ✨ Core Features
 
-Protected routes & session persistence
+## 🔐 Authentication System
+- Secure student login & registration  
+- Profile image upload  
+- JWT-based protected routes  
+- Session persistence  
 
-📊 Academic Tools
+---
 
-Attendance Tracker with color indicators
+## 📊 Academic Dashboard
+- Real-time **Attendance Tracker**
+  - 🔴 Red – Below 75% (Critical)  
+  - 🟡 Yellow – 75–85% (Borderline)  
+  - 🟢 Green – Above 85% (Safe)  
+- SGPA / CGPA overview  
+- Semester-wise course history  
 
-🔴 Red (<75%)
+---
 
-🟡 Yellow (75–85%)
+## 📅 Events & Academic Calendar
+- Dynamic JSON-powered events  
+- Important event highlighting  
+- PDF calendar download  
+- Even & Odd semester schedules  
 
-🟢 Green (>85%)
+---
 
-SGPA / CGPA overview
+## 🏠 Campus Directory
+- 20+ Clubs & Societies  
+- 20+ Hostels with Warden details  
+- Guest House information  
+- Mess menu display  
 
-Semester-wise course listing
+---
 
-📅 Events & Calendar
+# 🛠️ Tech Stack
 
-Academic Calendar (JSON-powered)
+<div align="center">
 
-Important event filtering
+### 🌐 Frontend (Hosted on Firebase)
 
-PDF download support
+HTML • CSS • JavaScript  
+Three.js • Font Awesome  
 
-🏠 Campus Directory
+---
 
-20+ Clubs & Societies
+### ⚙️ Backend (Hosted on Render)
 
-Hostel Directory with warden details
+Node.js • Express.js  
+MongoDB Atlas • Mongoose  
+JWT • Multer  
 
-Mess Menu
+</div>
 
-Guest House Information
+---
 
-🎨 UI/UX
+# 🎨 Design System
 
-Three.js particle background
+## 🎨 Primary Colors
 
-Fully responsive (Mobile-first)
+| Hex Code | Color Name |
+|----------|------------|
+| `#1a237e` | Deep Indigo |
+| `#3949ab` | Medium Indigo |
+| `#00b0ff` | Bright Cyan |
+| `#4caf50` | Green |
+| `#ff9800` | Orange |
+| `#f44336` | Red |
 
-Smooth animations & gradient themes
+---
 
-Dark-mode optimized
+## 🧩 Design Philosophy
 
-🛠️ Tech Stack
-Frontend (Firebase Hosted)
+- 🌙 Dark Mode First  
+- 🧊 Glassmorphism Cards  
+- ⚡ Neon Cyan & Magenta Accents  
+- 📱 Fully Responsive (Mobile-first)  
+- 🎯 Smooth micro-interactions  
 
-HTML5
+---
 
-CSS3
+# 🚀 Deployment Architecture
 
-JavaScript
-
-Three.js
-
-Font Awesome
-
-Backend (Render Hosted)
-
-Node.js
-
-Express.js
-
-MongoDB Atlas
-
-Mongoose
-
-Multer (File Uploads)
-
-JWT Authentication
-
-🎨 Color Palette
-Primary Colors
-Hex Code	Color Name
-#1a237e	Deep Indigo
-#3949ab	Medium Indigo
-#00b0ff	Bright Cyan
-#4caf50	Green
-#ff9800	Orange
-#f44336	Red
-Design Style
-
-Dark Mode First
-
-Glassmorphism Cards
-
-Neon Cyan & Magenta Accents
-
-Smooth Micro-interactions
-
-🚀 Deployment
-🔹 Frontend
-
-Hosted on Firebase Hosting
-
-CDN optimized
-
-Secure HTTPS enabled
-
-🔹 Backend
-
-Hosted on Render.com
-
-Auto deploy on Git push
-
-Environment variables configured
-
-🔹 Database
-
-MongoDB Atlas (Cloud)
-
-📁 Project Structure
-uninits/
-│
-├── public/               # Frontend
-│   ├── assets/
-│   ├── css/
-│   ├── js/
-│   ├── data/
-│   └── *.html
-│
-├── db/                   # Database Schemas
-├── uploads/              # Profile images
-├── index.js              # Express server
-├── package.json
-└── README.md
-
-💻 Local Setup
-git clone https://github.com/Tinkal62/uninits.git
-cd uninits
-npm install
-
-
-Create .env file:
-
-MONGO_URI=your_mongodb_uri
-PORT=8080
-
-
-Start backend:
-
-node index.js
-
-
-Serve frontend:
-
-npx serve public
-
-🤝 Contributing
-
-Fork the repo
-
-Create a feature branch
-
-Commit changes
-
-Open Pull Request
-
-📄 License
-
-MIT License © 2026
-
-👨‍💻 Developer
-
-Tinkal Das
-Computer Science & Engineering
-NIT Silchar
-
-GitHub: https://github.com/Tinkal62
-
-LinkedIn: https://linkedin.com
-
-<div align="center"> Built with ❤️ for the NIT Silchar community </div>
