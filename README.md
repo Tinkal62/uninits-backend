@@ -10,7 +10,9 @@
 <br/>
 
 ### 🌐 Live Website  
-[![Live Demo](https://img.shields.io/badge/Live_Demo-Visit_Website-00b0ff?style=for-the-badge&logo=google-chrome&logoColor=white)](https://uninits-7cfc9.web.app)
+<a href="https://uninits-7cfc9.web.app" target="_blank">
+  https://uninits-7cfc9.web.app
+</a>
 
 <br/>
 
