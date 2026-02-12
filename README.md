@@ -13,7 +13,6 @@
 ![Frontend](https://img.shields.io/badge/Frontend-Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)
 ![Backend](https://img.shields.io/badge/Backend-Render-46E3B7?style=for-the-badge&logo=render&logoColor=black)
 ![Database](https://img.shields.io/badge/Database-MongoDB_Atlas-47A248?style=for-the-badge&logo=mongodb&logoColor=white)
-![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
 </div>
 
@@ -121,8 +120,6 @@ JWT • Multer
 
 # 🚀 Deployment Architecture
 
---
-
 
 ### 🔹 Frontend
 - Firebase Hosting
@@ -145,7 +142,7 @@ NIT Silchar
 
 <a href="https://github.com/Tinkal62"> <img src="https://img.shields.io/badge/GitHub-Tinkal62-181717?style=for-the-badge&logo=github"/> </a> <a href="https://www.linkedin.com/in/tinkal-das-734aa8325"> <img src="https://img.shields.io/badge/LinkedIn-Tinkal_Das-0077B5?style=for-the-badge&logo=linkedin"/> </a> </div>
 <div align="center">
-💙 Built for the NIT Silchar Community
+❤️ Built for the NIT Silchar Community
 
 © 2026 uniNITS
 
