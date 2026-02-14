@@ -112,11 +112,6 @@ function getBranchFromScholarId(scholarId) {
 
 
 
-function getBranchFromScholarId(scholarId) {
-  const code = Number(scholarId.toString()[3]);
-  return { 1: "CE", 2: "CSE", 3: "EE", 4: "ECE", 5: "EIE", 6: "ME" }[code];
-}
-
 // Health Check
 app.get("/", (req, res) => {
   res.json({ status: "Backend running", message: "uniNITS Backend API" });
@@ -342,7 +337,7 @@ app.get("/api/profile/:scholarId", async (req, res) => {
 
 
 
-// ------------------ COURSES ROUTE - UPDATED for alphanumeric IDs ------------------
+// ------------------ COURSES ROUTE - FINAL FIX ------------------
 app.get("/api/courses/:scholarId", async (req, res) => {
   try {
     const { scholarId } = req.params;
@@ -350,36 +345,44 @@ app.get("/api/courses/:scholarId", async (req, res) => {
     
     console.log("📚 Courses request for:", idStr);
     
-    // Get semester using updated helper
+    // Get semester using helper
     const semester = getCurrentSemesterFromScholarId(idStr);
     
-    // Get branch code in format that matches your Course schema
+    // Get branch code based on scholarId format
     let branchCode = null;
+    let branchName = null;
     
     // For alphanumeric IDs like "25EC10001"
-    if (idStr.length >= 4) {
+    if (idStr.length >= 4 && isNaN(parseInt(idStr.substring(2, 4)))) {
       const branchPart = idStr.substring(2, 4); // "EC"
       const branchToCode = {
         "CE": 1, "CS": 2, "EE": 3, "EC": 4, "EI": 5, "ME": 6
       };
       branchCode = branchToCode[branchPart];
+      branchName = branchPart;
     }
     
     // For numeric IDs like "2415062"
     if (branchCode === null) {
-      branchCode = Number(idStr[3]);
+      const code = Number(idStr[3]);
+      if (!isNaN(code) && code >= 1 && code <= 6) {
+        branchCode = code;
+        const codeToBranch = {1: "CE", 2: "CSE", 3: "EE", 4: "ECE", 5: "EIE", 6: "ME"};
+        branchName = codeToBranch[code];
+      }
     }
     
-    console.log("Extracted - Semester:", semester, "BranchCode:", branchCode);
+    console.log("Extracted - Semester:", semester, "BranchCode:", branchCode, "BranchName:", branchName);
     
     if (!semester || !branchCode) {
+      console.log("❌ Could not determine semester or branch");
       return res.json({
         currentSemesterCourses: [],
-        allCourses: [],
-        error: "Could not determine semester or branch from scholarId"
+        allCourses: []
       });
     }
 
+    // Try to find courses with this branchCode
     const current = await Course.findOne({ branchCode, semester });
     const all = await Course.find({ branchCode }).sort({ semester: 1 });
 
@@ -391,7 +394,7 @@ app.get("/api/courses/:scholarId", async (req, res) => {
     });
   } catch (err) {
     console.error("❌ Courses route error:", err);
-    res.status(500).json({ error: "Server error", details: err.message });
+    res.status(500).json({ error: "Server error" });
   }
 });
 
@@ -399,8 +402,7 @@ app.get("/api/courses/:scholarId", async (req, res) => {
 
 
 
-
-// ------------------ ATTENDANCE ROUTES - UPDATED ------------------
+// ------------------ ATTENDANCE ROUTES - FINAL FIX ------------------
 app.get("/api/attendance/:scholarId", async (req, res) => {
   try {
     const { scholarId } = req.params;
@@ -408,12 +410,14 @@ app.get("/api/attendance/:scholarId", async (req, res) => {
     
     console.log("📊 Attendance request for:", searchId);
     
-    // Try to find attendance with string ID first
+    // Try to find attendance with EXACT string match first
     let doc = await Attendance.findOne({ scholarId: searchId });
     
-    // If not found and it's numeric, try as number
-    if (!doc && !isNaN(searchId)) {
-      doc = await Attendance.findOne({ scholarId: Number(searchId) });
+    // If not found, try case-insensitive (for any format issues)
+    if (!doc) {
+      doc = await Attendance.findOne({ 
+        scholarId: { $regex: new RegExp(`^${searchId}$`, 'i') } 
+      });
     }
     
     res.json(doc || { scholarId: searchId, attendance: [] });
@@ -430,12 +434,13 @@ app.post("/api/attendance/update", async (req, res) => {
     
     console.log("📝 Attendance update for:", searchId, subjectCode);
 
-    // Try to find existing attendance record
+    // Find existing record with consistent approach
     let doc = await Attendance.findOne({ scholarId: searchId });
     
-    // If not found and it's numeric, try as number
-    if (!doc && !isNaN(searchId)) {
-      doc = await Attendance.findOne({ scholarId: Number(searchId) });
+    if (!doc) {
+      doc = await Attendance.findOne({ 
+        scholarId: { $regex: new RegExp(`^${searchId}$`, 'i') } 
+      });
     }
     
     if (!doc) {
