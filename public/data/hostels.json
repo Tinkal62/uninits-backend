@@ -1,0 +1,182 @@
+[
+  {
+    "hostel_name": "Boys Hostel - 1",
+    "warden": "Dr. Partha Pakray",
+    "warden_phone": "+91-8259065018",
+    "warden_email": "partha@cse.nits.ac.in",
+    "assist_warden": "",
+    "assist_warden_phone": "",
+    "assist_warden_email": ""
+  },
+  {
+    "hostel_name": "Boys Hostel - 2",
+    "warden": "Dr. Shankar K.",
+    "warden_phone": "+91-8870525684",
+    "warden_email": "shankar@ei.nits.ac.in",
+    "assist_warden": "",
+    "assist_warden_phone": "",
+    "assist_warden_email": ""
+  },
+  {
+    "hostel_name": "Boys Hostel - 3",
+    "warden": "Dr. Biswa Nath Ghosh",
+    "warden_phone": "+91-8018123682",
+    "warden_email": "bnghosh@che.nits.ac.in",
+    "assist_warden": "",
+    "assist_warden_phone": "",
+    "assist_warden_email": ""
+  },
+  {
+    "hostel_name": "Boys Hostel - 4",
+    "warden": "Dr. Simanchar Kar",
+    "warden_phone": "+91-8249994335",
+    "warden_email": "simanchal@mech.nits.ac.in",
+    "assist_warden": "Dr. Santosh Kumar",
+    "assist_warden_phone": "+91-9342264276",
+    "assist_warden_email": "santosh@mech.nits.ac.in"
+  },
+  {
+    "hostel_name": "Boys Hostel - 5",
+    "warden": "N/A",
+    "warden_phone": "",
+    "warden_email": "",
+    "assist_warden": "",
+    "assist_warden_phone": "",
+    "assist_warden_email": ""
+  },
+  {
+    "hostel_name": "Boys Hostel - 6",
+    "warden": "Dr. Chayan Bhattacharjee",
+    "warden_phone": "+91-9435730356",
+    "warden_email": "chayan@ee.nits.ac.in",
+    "assist_warden": "Dr. Biswarup Ganguly",
+    "assist_warden_phone": "",
+    "assist_warden_email": "bganguly@ee.nits.ac.in"
+  },
+  {
+    "hostel_name": "Boys Hostel - 7",
+    "warden": "Dr. Sushant Negi",
+    "warden_phone": "+91-9816111560",
+    "warden_email": "sushant@mech.nits.ac.in",
+    "assist_warden": "Dr. Parikshit Saikia",
+    "assist_warden_phone": "+91-9864979385",
+    "assist_warden_email": "parikshit@cse.nits.ac.in"
+  },
+  {
+    "hostel_name": "Boys Hostel - 8",
+    "warden": "Dr. Arun Kumar",
+    "warden_phone": "+91-9431404941",
+    "warden_email": "arunkumar@ece.nits.ac.in",
+    "assist_warden": "Dr. Himanshu Karan",
+    "assist_warden_phone": "+91-9732003148",
+    "assist_warden_email": "himanshu@ece.nits.ac.in"
+  },
+  {
+    "hostel_name": "Boys Hostel - 9A (J.C. Bose Hall)",
+    "warden": "Dr. Sudipta Chakraborty",
+    "warden_phone": "+91-9040429561",
+    "warden_email": "sudipta@ei.nits.ac.in",
+    "assist_warden": "",
+    "assist_warden_phone": "",
+    "assist_warden_email": ""
+  },
+  {
+    "hostel_name": "Boys Hostel - 9B (S. Ramanujan Hall)",
+    "warden": "Dr. Anup Kumar Sharma",
+    "warden_phone": "+91-9672505707",
+    "warden_email": "anup@ei.nits.ac.in",
+    "assist_warden": "Dr. Gautam Choubey",
+    "assist_warden_phone": "+91-9127244062",
+    "assist_warden_email": "gautamchoubey@mech.nits.ac.in"
+  },
+  {
+    "hostel_name": "Boys Hostel - 9C (C.V. Raman Hall)",
+    "warden": "Dr. Subrata Bera",
+    "warden_phone": "+91-8811046446",
+    "warden_email": "subrata@math.nits.ac.in",
+    "assist_warden": "",
+    "assist_warden_phone": "",
+    "assist_warden_email": ""
+  },
+  {
+    "hostel_name": "Boys Hostel - 9D (Vikram Sarabhai Hall)",
+    "warden": "Dr. Vipin Chandra Pal",
+    "warden_phone": "+91-7007231973",
+    "warden_email": "vipin@ei.nits.ac.in",
+    "assist_warden": "Dr. Jyotirmoy Haloi",
+    "assist_warden_phone": "+91-8876458563",
+    "assist_warden_email": "jyotirmoy@civil.nits.ac.in"
+  },
+  {
+    "hostel_name": "Aryabhata Hostel",
+    "warden": "Dr. Kavicharan Mummaneni",
+    "warden_phone": "+91-8919656541",
+    "warden_email": "kavicharan@ece.nits.ac.in",
+    "assist_warden": "Dr. Prosun Mandal",
+    "assist_warden_phone": "+91-9681386603",
+    "assist_warden_email": "prosun@mech.nits.ac.in"
+  },
+  {
+    "hostel_name": "Girls Hostel - 1",
+    "warden": "Dr. Tripti Goel",
+    "warden_phone": "+91-9541345413",
+    "warden_email": "triptigoel@ece.nits.ac.in",
+    "assist_warden": "",
+    "assist_warden_phone": "",
+    "assist_warden_email": ""
+  },
+  {
+    "hostel_name": "Girls Hostel - 1A & 1B",
+    "warden": "Dr. Asha Rani M. A.",
+    "warden_phone": "+91-8075692305",
+    "warden_email": "asharani@ee.nits.ac.in",
+    "assist_warden": "",
+    "assist_warden_phone": "",
+    "assist_warden_email": ""
+  },
+  {
+    "hostel_name": "Girls Hostel - 2",
+    "warden": "Dr. M.V.Swati",
+    "warden_phone": "+91-8876411266",
+    "warden_email": "swati@ece.nits.ac.in",
+    "assist_warden": "",
+    "assist_warden_phone": "",
+    "assist_warden_email": ""
+  },
+  {
+    "hostel_name": "Girls Hostel - 3 (K.C. Hall)",
+    "warden": "Dr Panchali Bhattacharya",
+    "warden_phone": "",
+    "warden_email": "panchali@hum.nits.ac.in",
+    "assist_warden": "",
+    "assist_warden_phone": "",
+    "assist_warden_email": ""
+  },
+  {
+    "hostel_name": "Girls Hostel - 4",
+    "warden": "Dr. Binoti Patro",
+    "warden_phone": "+91-9708117720",
+    "warden_email": "binotipatro@mba.nits.ac.in",
+    "assist_warden": "",
+    "assist_warden_phone": "",
+    "assist_warden_email": ""
+  },
+  {
+    "hostel_name": "A. Lalitha Hall (MSH Block A,B,C)",
+    "warden": "Dr. Tanay Nayak",
+    "warden_phone": "+91-8249325452",
+    "warden_email": "tanayanayak@mba.nits.ac.in",
+    "assist_warden": "",
+    "assist_warden_phone": "",
+    "assist_warden_email": ""
+  },
+  {
+    "hostel_name": "Married Scholar's Hostel",
+    "warden": "Dr. Kulkarni Vihangraj Vijaykumar",
+    "warden_phone": "+91-9207344531",
+    "warden_email": "kulkarni@civil.nits.ac.in",
+    "assist_warden": "",
+    "assist_warden_phone": "",
+    "assist_warden_email": ""
+  }
+]

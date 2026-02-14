@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Attendance Tracker | uniNITS</title>
+  <link rel="icon" href="/assets/images/logo.png" type="image/png">
+  <link rel="stylesheet" href="/css/index.css?v=3">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body class="attend-body">
+
+<div class="main-content">
+
+  <!-- Navbar will be loaded here -->
+  <div id="navbar-container"></div>
+
+  <!-- ================= ATTENDANCE SECTION ================= -->
+  <section class="section attend-section" style="margin-top:120px">
+
+    <h1 class="gradient-text section-title attend-text">Attendance Tracker</h1>
+
+    <p class="mb-4">
+      <b>Semester:</b> <span id="semester">--</span> &nbsp;&nbsp; | &nbsp;&nbsp;
+      <b>Scholar ID:</b> <span id="scholarId">--</span>
+    </p>
+
+    <!-- SUBJECT CARDS CONTAINER -->
+    <div id="attendanceContainer">
+
+      <!-- SUBJECT CARD TEMPLATE (DO NOT STYLE CHANGE) -->
+      <div class="sub-card" data-code="">
+
+        <div class="attend-subject">
+          <div class="attend-sub-text subject-name">Subject Name</div>
+          <div class="attend-sub-date subject-code">SUB101</div>
+        </div>
+
+        <div class="attend-data">
+
+          <!-- TOTAL -->
+          <div>
+            <small>Total</small>
+            <span class="total">0</span>
+            <br>
+            <button class="inc-dec" onclick="update(this,-1,'total')">-</button>
+            <button class="inc-dec" onclick="update(this,1,'total')">+</button>
+          </div>
+
+          <!-- ATTENDED -->
+          <div>
+            <small>Attended</small>
+            <span class="attended">0</span>
+            <br>
+            <button class="inc-dec" onclick="update(this,-1,'attended')">-</button>
+            <button class="inc-dec" onclick="update(this,1,'attended')">+</button>
+          </div>
+
+          <!-- % -->
+          <div>
+            <b class="percent">0%</b>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer will be loaded here -->
+  <div id="footer-container"></div>
+
+</div>
+
+<!-- ================= JS ================= -->
+<!-- <script src="/js/app.js"></script> -->
+
+<script src="/js/auth-check.js"></script>
+<script src="/js/logout.js"></script>
+<script src="/js/attendance.js"></script>
+<script src="/js/components.js"></script> 
+
+</body>
+</html>

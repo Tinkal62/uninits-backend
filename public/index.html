@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>uniNITS Dashboard</title>
+  <link rel="icon" href="/assets/images/logo.png" type="image/png">
+  <link rel="stylesheet" href="/css/index.css?v=3">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+
+<body class="index-body">
+
+  <div id="canvas-container"></div>
+
+  <div class="main-content">
+
+    <!-- Navbar will be loaded here -->
+    <div id="navbar-container"></div>
+
+    <!-- ================= HERO ================= -->
+    <section class="hero">
+      <div class="hero-card">
+        <h2>Welcome Back</h2>
+
+        <h1 class="gradient-text">
+          <span id="userName">User</span>
+        </h1>
+
+        <h3 style="text-align: center;">
+          Are you excited for
+          <span class="highlight-text">Incandescence</span> ?
+        </h3>
+
+        <p class="hero-description">By the way <b>uniNITS</b> is a unified digital platform designed to simplify and enhance campus life for NIT Silchar students. It brings academic tools, events, resources, and essential campus information together in one seamless, user-friendly space.</p>
+
+        <div class="hero-btn">
+          <a href="#upcoming-events" style="text-decoration:none;">
+            <button class="btn-primary btn-events">
+              <i class="fa-solid fa-bell"></i> Upcoming Events
+            </button>
+          </a>
+
+          &nbsp;&nbsp;&nbsp;
+
+          <a href="/profile.html" style="text-decoration:none;">
+            <button class="btn-primary btn-profile">
+              <i class="fa-solid fa-user"></i> Your Profile
+            </button>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <div class="bg-black">
+      <!-- ================= UPCOMING EVENTS ================= -->
+      <br id="upcoming-events"><br>
+
+      <section class="section bg-black">
+        <h1 class="gradient-text">Upcoming Events</h1>
+
+        <div class="event-list" id="eventList">
+          <!-- Events will be dynamically loaded here from JSON -->
+          <div class="loading-event">Loading upcoming events...</div>
+        </div>
+
+        <a href="/events.html" class="see-more-link">See more</a>
+      </section>
+
+      <!-- ================= ACADEMIC TOOLS ================= -->
+      <br id="academic-tools">
+      <br>
+      <section class="section">
+        <div class="tools-stats-grid">
+          <a href="/events.html">
+            <div class="tool-stat-card gradient-11">
+              <div class="tool-stat-icon">
+                <i class="fas fa-calendar-alt"></i>
+              </div>
+              <div class="tool-stat-content">
+                <h4>Academic Calendar</h4>
+                <p>View important academic dates, exams, holidays, and institute schedules at a glance.</p>
+              </div>
+            </div>
+          </a>
+
+          <a href="/attendance.html">
+            <div class="tool-stat-card gradient-12">
+              <div class="tool-stat-icon">
+                <i class="fas fa-chart-line"></i>
+              </div>
+              <div class="tool-stat-content">
+                <h4>Attendance Tracker</h4>
+                <p>Track your class attendance and stay updated with subject-wise records easily.</p>
+              </div>
+            </div>
+          </a>
+
+          <a href="study">
+            <div class="tool-stat-card gradient-13">
+              <div class="tool-stat-icon">
+                <i class="fas fa-book"></i>
+              </div>
+              <div class="tool-stat-content">
+                <h4>Study Material</h4>
+                <p>Find notes, PDFs, and useful study resources in one organized place.</p>
+              </div>
+            </div>
+          </a>
+
+          <a href="clubs_society.html">
+            <div class="tool-stat-card gradient-21">
+              <div class="tool-stat-icon">
+                <i class="fa-solid fa-landmark"></i>
+              </div>
+              <div class="tool-stat-content">
+                <h4>Clubs and Societies</h4>
+                <p>Discover NIT Silchar clubs, societies, and their ongoing activities.</p>
+              </div>
+            </div>
+          </a>
+
+          <a href="/hostels.html">
+            <div class="tool-stat-card gradient-22">
+              <div class="tool-stat-icon">
+                <i class="fa-solid fa-hotel"></i>
+              </div>
+              <div class="tool-stat-content">
+                <h4>Hostels</h4>
+                <p>Get essential information about hostels, facilities, and related updates.</p>
+              </div>
+            </div>
+          </a>
+
+          <a href="https://www.linkedin.com/school/tnpnitsilchar/posts/?feedView=all">
+            <div class="tool-stat-card gradient-23">
+              <div class="tool-stat-icon">
+                <i class="fa-solid fa-user-doctor"></i>
+              </div>
+              <div class="tool-stat-content">
+                <h4>Placements</h4>
+                <p>Stay updated with placement news, company visits, and TPC announcements.</p>
+              </div>
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <!-- ================= MOVING CARDS SECTION ================= -->
+      <section class="marquee-section">
+        <div class="marquee-container">
+          <div class="marquee-track">
+            <a href="/clubs_society.html"><div class="marquee-item">Clubs</div></a>
+            <a href="/clubs_society.html#branch_socity"><div class="marquee-item">Societies</div></a>
+            <a href="#upcoming-events"><div class="marquee-item">Events</div></a>
+            <a href="/hostels.html"><div class="marquee-item">Hostels</div></a>
+            <a href="/guest_house.html"><div class="marquee-item">Guest House</div></a>
+            <a href="https://www.nits.ac.in/academic/fee-structure-ug-and-pg"><div class="marquee-item">Institute Fees</div></a>
+            <a href="https://www.linkedin.com/school/tnpnitsilchar/posts/?feedView=all"><div class="marquee-item">Placements</div></a>
+
+            <!-- duplicate for smooth infinite scroll -->
+            <a href="/clubs_society.html"><div class="marquee-item">Clubs</div></a>
+            <a href="/clubs_society.html#branch_socity"><div class="marquee-item">Societies</div></a>
+            <a href="#upcoming-events"><div class="marquee-item">Events</div></a>
+            <a href="/hostels.html"><div class="marquee-item">Hostels</div></a>
+            <a href="/guest_house.html"><div class="marquee-item">Guest House</div></a>
+            <a href="https://www.nits.ac.in/academic/fee-structure-ug-and-pg"><div class="marquee-item">Institute Fees</div></a>
+            <a href="https://www.linkedin.com/school/tnpnitsilchar/posts/?feedView=all"><div class="marquee-item">Placements</div></a>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ================= FEEDBACK ================= -->
+    <br id="feedback">
+    <br>
+    <section class="section feedback-section">
+      <div class="feedback-card">
+        <h3 class="gradient-text section-title">Wanna Give A Suggestion ?</h3>
+        <textarea 
+          placeholder="Share your thoughts with us..." 
+          class="feedback-textarea"
+        ></textarea>
+        <button class="btn-primary btn-feedback">
+          <i class="fas fa-paper-plane"></i> Submit Feedback
+        </button>
+      </div>
+    </section>
+
+    <!-- Footer will be loaded here -->
+    <div id="footer-container"></div>
+  </div>
+
+  <script src="/js/auth-check.js"></script>
+  <script src="/js/logout.js"></script>
+  <script src="/js/canvas.js"></script>
+  <script src="/js/components.js"></script>
+  <script src="/js/events-loader.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      console.log("Index page loaded");
+      
+      // ============ LOAD USER DATA ============
+      const student = JSON.parse(localStorage.getItem("student"));
+      
+      if (student) {
+        // Update welcome message
+        const userName = student.name || student.userName || "Student";
+        document.getElementById("userName").innerText = userName;
+        
+        // Update profile image with fallback
+        const profileImage = document.getElementById("profileImage");
+        if (profileImage) {
+          if (student.profileImage && student.profileImage !== "null") {
+            profileImage.src = `/assets/images/${student.profileImage}`;
+          } else {
+            profileImage.src = "/assets/images/default.png";
+          }
+          
+          profileImage.onerror = function() {
+            console.warn("Profile image failed to load, using default");
+            this.src = "/assets/images/default.png";
+            this.onerror = null;
+            const student = JSON.parse(localStorage.getItem("student"));
+            if (student) {
+              student.profileImage = "default.png";
+              localStorage.setItem("student", JSON.stringify(student));
+            }
+          };
+        }
+      }
+      
+      // ============ LOAD UPCOMING IMPORTANT EVENTS FROM JSON ============
+      try {
+        const eventsLoader = new EventsLoader();
+        await eventsLoader.loadEvents();
+        eventsLoader.renderUpcomingImportantEvents(5);
+      } catch (error) {
+        console.error('Error loading upcoming important events:', error);
+        
+        // Fallback important events if JSON fails to load
+        const container = document.getElementById("eventList");
+        if (container) {
+          const fallbackImportantEvents = [
+            { description: "Incandescence", date_range: "13 February - 16 February 2026" },
+            { description: "Mid semester examination", date_range: "23rd Feb to 2nd March 2026" },
+            { description: "Last date of showing mid semester marks", date_range: "13th March 2026" },
+            { description: "End-Semester Lab Exam", date_range: "24th April to 1st May 2026" },
+            { description: "End Semester examination", date_range: "4th May to 12th May 2026" }
+          ];
+          
+          fallbackImportantEvents.forEach(event => {
+            const div = document.createElement('div');
+            div.className = 'event-card important-event-card';
+            container.appendChild(div);
+          });
+        }
+      }
+      
+      // ============ MOBILE SCROLL FIX ============
+      function fixMobileScrolling() {
+        if (window.innerWidth <= 768) {
+          document.body.style.overflow = 'auto';
+          document.body.style.height = 'auto';
+          document.body.style.position = 'relative';
+          document.body.style.webkitOverflowScrolling = 'touch';
+          
+          const mainContent = document.querySelector('.main-content');
+          if (mainContent) {
+            mainContent.style.overflowY = 'auto';
+            mainContent.style.webkitOverflowScrolling = 'touch';
+            mainContent.style.height = 'auto';
+          }
+          
+          const canvas = document.getElementById('canvas-container');
+          if (canvas) {
+            canvas.style.display = 'none';
+          }
+          
+          document.addEventListener('touchmove', function(e) {
+            // Never prevent default on touchmove
+          }, { passive: true });
+        }
+      }
+      
+      fixMobileScrolling();
+      window.addEventListener('resize', fixMobileScrolling);
+      setTimeout(fixMobileScrolling, 500);
+    });
+
+    // Override addEventListener to prevent scroll blocking
+    (function() {
+      const originalAddEventListener = EventTarget.prototype.addEventListener;
+      EventTarget.prototype.addEventListener = function(type, listener, options) {
+        if (type === 'touchmove') {
+          const wrappedListener = function(e) {
+            try {
+              return listener(e);
+            } catch(err) {
+              console.error('Touchmove listener error:', err);
+            }
+          };
+          return originalAddEventListener.call(this, type, wrappedListener, { passive: true });
+        }
+        return originalAddEventListener.call(this, type, listener, options);
+      };
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hostels | uniNITS</title>
+  <link rel="icon" href="/assets/images/logo.png" type="image/png">
+  <link rel="stylesheet" href="/css/index.css?v=3">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="/css/hostels.css?v=2">
+</head>
+
+<body class="registration-body">
+  
+  <div class="main-content">
+  
+    <div id="navbar-container"></div>
+
+    <!-- ================= HERO SECTION ================= -->
+    <section class="hero" style="min-height: 30vh; padding-top: 100px;">
+      <div class="hero-card" style="max-width: 1000px;">
+        <h1 class="gradient-text">Hostels</h1>
+        <p class="hero-description">
+          Find all information about NIT Silchar hostels, wardens, and mess facilities in one place. 
+          Stay updated with today's mess menu and contact details.
+        </p>
+      </div>
+    </section>
+
+    <!-- ================= TODAY'S MESS MENU ================= -->
+    <section class="section">
+      <div class="menu-container">
+        <h2 class="section-title">
+          <i class="fas fa-utensils"></i> Today's Mess Menu
+          <br>
+          <span id="todayDate" class="date-badge"></span>
+        </h2>
+        
+        <div class="today-menu-card">
+          <div class="day-header">
+            <h3 id="todayDay">Loading...</h3>
+          </div>
+          
+          <div class="full-day-menu">
+            <!-- Breakfast -->
+            <div class="meal-item">
+              <div class="meal-icon">
+                <i class="fas fa-sun"></i>
+              </div>
+              <div class="meal-details">
+                <h4>Breakfast</h4>
+                <p id="breakfast-menu">Loading...</p>
+              </div>
+            </div>
+            
+            <!-- Lunch -->
+            <div class="meal-item">
+              <div class="meal-icon">
+                <i class="fas fa-utensil-spoon"></i>
+              </div>
+              <div class="meal-details">
+                <h4>Lunch</h4>
+                <p id="lunch-menu">Loading...</p>
+              </div>
+            </div>
+            
+            <!-- Snacks -->
+            <div class="meal-item">
+              <div class="meal-icon">
+                <i class="fas fa-coffee"></i>
+              </div>
+              <div class="meal-details">
+                <h4>Snacks</h4>
+                <p id="snacks-menu">Loading...</p>
+              </div>
+            </div>
+            
+            <!-- Dinner -->
+            <div class="meal-item">
+              <div class="meal-icon">
+                <i class="fas fa-moon"></i>
+              </div>
+              <div class="meal-details">
+                <h4>Dinner - Veg</h4>
+                <p id="dinner-veg">Loading...</p>
+              </div>
+            </div>
+            
+            <!-- Non-Veg Dinner -->
+            <div class="meal-item">
+              <div class="meal-icon">
+                <i class="fas fa-drumstick-bite"></i>
+              </div>
+              <div class="meal-details">
+                <h4>Dinner - Non-Veg</h4>
+                <p id="dinner-nonveg">Loading...</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="menu-footer">
+            <button class="btn-primary" id="viewFullMenu">
+              <i class="fas fa-calendar-alt"></i> View Full Week Menu
+            </button>
+            <div class="menu-note">
+              <i class="fas fa-info-circle"></i> Menu is subject to change based on availability
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= HOSTELS LIST ================= -->
+    <section class="section">
+      <div class="hostels-container">
+        <h2 class="section-title gradient-text">
+          <i class="fas fa-building"></i> Hostels at NIT Silchar
+        </h2>
+        
+        <div class="hostels-grid" id="hostels-list">
+          <!-- Hostels will be loaded here dynamically -->
+        </div>
+      </div>
+    </section>
+
+    <div id="footer-container"></div>
+  </div>
+
+  <!-- Full Week Menu Modal -->
+  <div class="modal-overlay" id="menuModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="gradient-text">Weekly Mess Menu</h2>
+        <button class="modal-close" id="closeModal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="table-container">
+          <table class="menu-table" id="weeklyMenuTable">
+            <thead>
+              <tr>
+                <th>Day</th>
+                <th>Breakfast</th>
+                <th>Lunch</th>
+                <th>Snacks</th>
+                <th>Dinner (Veg)</th>
+                <th>Dinner (Non-Veg)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Will be populated by JavaScript -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-primary" id="closeModalBtn">
+          <i class="fas fa-times"></i> Close
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/auth-check.js"></script>
+  <script src="/js/logout.js"></script>
+  <script src="/js/components.js"></script>
+  <script src="/js/hostels.js?v=2"></script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login | uniNITS</title>
+  <link rel="icon" href="/assets/images/logo.png" type="image/png">
+  <link rel="stylesheet" href="/css/index.css?v=3">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body class="login-body">
+
+  <div class="main-content">
+
+    <!-- Navbar will be loaded here -->
+    <div id="navbar-container"></div>
+
+    <!-- ================= LOGIN SECTION ================= -->
+    <section class="section feedback-section" style="margin-top: 120px;">
+      <div class="feedback-card">
+
+        <h2 class="gradient-text section-title">Student Login</h2>
+
+        <!-- FORM (JS controlled) -->
+        <form id="studentLoginForm">
+
+          <textarea
+            id="scholarId"
+            class="feedback-textarea mt-3"
+            placeholder="Enter Scholar ID (e.g. 2211001 or 25CS10001)"
+            required
+            style="height: 70px;"
+          ></textarea>
+
+          <button type="submit" class="btn-primary btn-feedback">
+            <i class="fas fa-right-to-bracket"></i> Login
+          </button>
+
+        </form>
+
+        <br>
+
+        <!--------------------registration for new user------------------------->
+        <a href="/register.html" style="color: aqua; cursor: pointer;">Registration</a>
+        <br>
+        <a href="/index.html" style="color: aqua; cursor: pointer;">Continue without registration</a>
+
+      </div>
+    </section>
+
+    <!-- Footer will be loaded here -->
+    <div id="footer-container"></div>
+
+  </div>
+
+
+  <script src="/js/auth-check.js"></script>
+  <script src="/js/login.js"></script>
+  <script src="/js/components.js"></script> 
+ 
+
+</body>
+</html>

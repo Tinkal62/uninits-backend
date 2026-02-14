@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Academic Calendar | uniNITS</title>
+  <link rel="icon" href="/assets/images/logo.png" type="image/png">
+  <link rel="stylesheet" href="/css/index.css?v=3">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body class="events-body">
+
+  <div class="main-content">
+    <!-- Navbar will be loaded here -->
+    <div id="navbar-container"></div>
+
+    <!-- ================= HERO SECTION ================= -->
+    <section class="hero" style="min-height: 40vh; padding-top: 100px;">
+      <div class="hero-card" style="max-width: 1000px;">
+        <h1 class="gradient-text">Academic Calendar 2026</h1>
+        <h2 id="semester-heading">Loading...</h2>
+        <p class="hero-description">
+          Stay updated with all important academic dates, exams, holidays, and institute schedules for the year 2026.
+          Mark your calendars and never miss a deadline!
+        </p>
+        
+        <div class="hero-btn" style="margin-top: 20px;">
+          <a href="/assets/academic-calendar.pdf" class="download-btn" download>
+            <i class="fas fa-download"></i> Download PDF Version
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CALENDAR CONTENT ================= -->
+    <section class="section">
+      <div class="calendar-container" id="calendarContainer">
+        <!-- Events will be dynamically loaded here from JSON -->
+        <div class="loading-indicator">Loading calendar events...</div>
+      </div>
+    </section>
+
+    <!-- Footer will be loaded here -->
+    <div id="footer-container"></div>
+
+  </div>
+
+  <script src="/js/auth-check.js"></script>
+  <script src="/js/logout.js"></script>
+  <script src="/js/components.js"></script>
+  <script src="/js/events-loader.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', async function() {
+      // Mobile scroll fix
+      if (window.innerWidth <= 768) {
+        document.body.style.overflow = 'auto';
+        document.body.style.height = 'auto';
+        document.body.style.position = 'relative';
+      }
+      
+      // Load and render events from JSON
+      const eventsLoader = new EventsLoader();
+      await eventsLoader.loadEvents();
+      eventsLoader.renderEventsPage();
+      
+      // Update download link
+      const pdfPath = '/assets/documents/Academiccalendar.pdf';
+      const downloadBtn = document.querySelector('.download-btn');
+      if (downloadBtn) {
+        downloadBtn.href = pdfPath;
+      }
+    });
+  </script>
+</body>
+</html>
